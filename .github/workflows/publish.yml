@@ -10,8 +10,8 @@ jobs:
     publish:
         runs-on: ubuntu-latest
         permissions:
-            contents: write # Needed to push version bump back to GitHub[cite: 8]
-            id-token: write # Required for provenance[cite: 8]
+            contents: write # Needed to push version bump back to GitHub
+            id-token: write # Required for provenance
 
         steps:
             - name: Checkout repository
@@ -25,7 +25,7 @@ jobs:
               with:
                   node-version: 22
                   registry-url: 'https://registry.npmjs.org'
-                  scope: '@osee'[cite: 8]
+                  scope: '@osee'
 
             - name: Set Git Identity
               run: |

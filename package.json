@@ -1,0 +1,53 @@
+{
+	"name": "@osee/avatar",
+	"version": "1.0.0",
+	"description": "A lightweight deterministic 512x512 SVG avatar generator based on seed phrases",
+	"keywords": [
+		"avatar",
+		"svg",
+		"avatar-generator",
+		"profile-picture",
+		"seed-avatar",
+		"identicon",
+		"cloudflare-workers"
+	],
+	"homepage": "https://github.com/lazosee/osee-avatar#readme",
+	"bugs": {
+		"url": "https://github.com/lazosee/osee-avatar/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/lazosee/osee-avatar.git"
+	},
+	"license": "MIT",
+	"author": "Lazaro Osee <oseelazaro@gmail.com> (https://github.com/lazosee)",
+	"type": "module",
+	"main": "./dist/index.cjs",
+	"module": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"exports": {
+		".": {
+			"import": {
+				"types": "./dist/index.d.ts",
+				"default": "./dist/index.js"
+			},
+			"require": {
+				"types": "./dist/index.d.ts",
+				"default": "./dist/index.cjs"
+			}
+		}
+	},
+	"files": [
+		"dist",
+		"README.md",
+		"LICENSE"
+	],
+	"scripts": {
+		"build": "tsup src/index.ts --format cjs,esm && tsc",
+		"prepublishOnly": "npm run build"
+	},
+	"devDependencies": {
+		"tsup": "^8.5.1",
+		"typescript": "^7.0.2"
+	}
+}

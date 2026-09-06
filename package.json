@@ -1,6 +1,6 @@
 {
 	"name": "@osee/avatar",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "A lightweight deterministic 512x512 SVG avatar generator based on seed phrases",
 	"keywords": [
 		"avatar",

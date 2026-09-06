@@ -10,25 +10,33 @@ jobs:
     publish:
         runs-on: ubuntu-latest
         permissions:
-            contents: read
-            id-token: write # Required for provenance and modern npm security
+            contents: write # Needed to push version bump back to GitHub[cite: 8]
+            id-token: write # Required for provenance[cite: 8]
 
         steps:
             - name: Checkout repository
               uses: actions/checkout@v4
+              with:
+                  # Required if pushing commits back
+                  fetch-depth: 0
 
             - name: Setup Node.js
-              uses: actions/setup-node@v7
+              uses: actions/setup-node@v4
               with:
-                  node-version: 24
+                  node-version: 22
                   registry-url: 'https://registry.npmjs.org'
-                  scope: '@osee'
+                  scope: '@osee'[cite: 8]
+
+            - name: Set Git Identity
+              run: |
+                  git config --global user.name "github-actions[bot]"
+                  git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
             - name: Patch version
-              run: npm version patch
+              run: npm version patch -m "chore(release) %s"
 
             - name: Install dependencies
-              run: npm ci
+              run: npm install
 
             - name: Build package
               run: npm run build
@@ -37,3 +45,6 @@ jobs:
               run: npm publish --access public --provenance
               env:
                   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+            - name: Push version bump
+              run: git push origin main --follow-tags
